@@ -1,4 +1,6 @@
-﻿namespace Adnc.Shared.WebApi.Authentication.Bearer;
+﻿using Adnc.Infra.JWT;
+
+namespace Adnc.Shared.WebApi.Authentication.Bearer;
 
 /// <summary>
 /// Bearer验证(认证)服务

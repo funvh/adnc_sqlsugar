@@ -49,7 +49,8 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
     {
         Services
             .AddValidatorsFromAssembly(ContractsLayerAssembly, ServiceLifetime.Scoped)
-            .AddAdncInfraAutoMapper(ApplicationLayerAssembly)
+            .AddAdncInfraAutoMapper(ApplicationLayerAssembly)   //使用AutoMapper  
+            //.AddAdncInfraMapster(ApplicationLayerAssembly)  //使用Mapster
             .AddAdncInfraYitterIdGenerater(RedisSection)
             .AddAdncInfraConsul(ConsulSection)
             .AddAdncInfraDapper();

@@ -1,10 +1,12 @@
-﻿namespace Adnc.Shared.Application.Services.Trackers;
+﻿using Adnc.Shared.Repository.EfEntities;
+
+namespace Adnc.Shared.Application.Services.Trackers;
 
 public class DbMessageTrackerService : IMessageTracker
 {
-    public IEfRepository<EventTracker> _trackerRepo;
+    public IEfRepository<EFEventTracker> _trackerRepo;
 
-    public DbMessageTrackerService(IEfRepository<EventTracker> trackerRepo)
+    public DbMessageTrackerService(IEfRepository<EFEventTracker> trackerRepo)
     {
         _trackerRepo = trackerRepo;
     }
@@ -18,7 +20,7 @@ public class DbMessageTrackerService : IMessageTracker
 
     public async Task MarkAsProcessedAsync(long eventId, string trackerName)
     {
-        await _trackerRepo.InsertAsync(new EventTracker
+        await _trackerRepo.InsertAsync(new EFEventTracker
         {
             Id = IdGenerater.GetNextId(),
             EventId = eventId,

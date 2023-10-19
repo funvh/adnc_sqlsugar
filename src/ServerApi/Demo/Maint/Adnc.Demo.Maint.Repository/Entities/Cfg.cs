@@ -3,7 +3,7 @@
 /// <summary>
 /// 系统参数
 /// </summary>
-public class Cfg : EfFullAuditEntity, ISoftDelete
+public class Cfg : EfFullAuditEntity, ISoftDeleteFilter
 {
     /// <summary>
     /// 参数名

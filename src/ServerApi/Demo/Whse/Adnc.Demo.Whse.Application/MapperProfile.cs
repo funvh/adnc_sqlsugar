@@ -1,4 +1,5 @@
 ﻿using Adnc.Demo.Shared.Rpc.Grpc.Messages;
+using Adnc.Infra.IRepository;
 
 namespace Adnc.Demo.Whse.Application;
 

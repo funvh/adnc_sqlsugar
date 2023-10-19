@@ -3,7 +3,7 @@
 /// <summary>
 /// 字典
 /// </summary>
-public class Dict : EfFullAuditEntity, ISoftDelete
+public class Dict : EfFullAuditEntity, ISoftDeleteFilter
 {
     public string Name { get; set; } = string.Empty;
 

@@ -1,6 +1,4 @@
-﻿using NLog.LayoutRenderers;
-
-namespace Adnc.Shared.WebApi.Authentication.JwtBearer;
+﻿namespace Adnc.Shared.WebApi.Authentication.JwtBearer;
 
 public static class JwtTokenHelper
 {

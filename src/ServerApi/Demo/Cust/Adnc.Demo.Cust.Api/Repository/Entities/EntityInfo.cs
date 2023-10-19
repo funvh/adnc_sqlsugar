@@ -13,6 +13,6 @@ public class EntityInfo : AbstracSharedEntityInfo
         if (modelBuilder is not ModelBuilder builder)
             throw new ArgumentNullException(nameof(modelBuilder));
 
-        builder.Entity<EventTracker>().ToTable("cust_eventtracker");
+        builder.Entity<EFEventTracker>().ToTable("cust_eventtracker");
     }
 }

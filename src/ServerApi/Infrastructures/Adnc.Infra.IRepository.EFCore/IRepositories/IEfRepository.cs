@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Adnc.Infra.IRepository;
+﻿namespace Adnc.Infra.IRepository;
 
 /// <summary>
 /// Ef默认的、全功能的仓储接口
@@ -10,11 +8,6 @@ namespace Adnc.Infra.IRepository;
 public interface IEfRepository<TEntity> : IEfBaseRepository<TEntity>
     where TEntity : EfEntity
 {
-    /// <summary>
-    /// 数据库上下文对象
-    /// </summary>
-    DbContext DbContext { get; }
-
     /// <summary>
     /// 执行原生Sql查询
     /// </summary>

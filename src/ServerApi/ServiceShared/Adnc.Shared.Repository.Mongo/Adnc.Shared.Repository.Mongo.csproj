@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\common.props" />
+	<Import Project="..\..\version_shared.props" />
+	<Import Project="..\..\nuget.props" />
+	<PropertyGroup>
+		<Description>该层定义了仓储层基类。</Description>
+		<PackageTags>Adnc.Shared.Repository.Mongo</PackageTags>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.IRepository.Mongo\Adnc.Infra.IRepository.Mongo.csproj" />
+		<ProjectReference Include="..\Adnc.Shared\Adnc.Shared.csproj" />
+	</ItemGroup>
+</Project>

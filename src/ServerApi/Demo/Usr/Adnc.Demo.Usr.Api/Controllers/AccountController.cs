@@ -1,4 +1,6 @@
-﻿namespace Adnc.Demo.Usr.Api.Controllers;
+﻿using Adnc.Infra.JWT;
+
+namespace Adnc.Demo.Usr.Api.Controllers;
 
 /// <summary>
 /// 认证管理

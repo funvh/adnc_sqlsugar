@@ -1,4 +1,5 @@
-﻿using Adnc.Shared.Rpc.Event;
+﻿using Adnc.Infra.IRepository;
+using Adnc.Shared.Rpc.Event;
 
 namespace Adnc.Demo.Ord.Domain.Services;
 

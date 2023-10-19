@@ -1,4 +1,6 @@
-﻿namespace Adnc.Demo.Usr.Application.Cache;
+﻿using Adnc.Infra.JWT;
+
+namespace Adnc.Demo.Usr.Application.Cache;
 
 public sealed class CacheService : AbstractCacheService, ICachePreheatable
 {

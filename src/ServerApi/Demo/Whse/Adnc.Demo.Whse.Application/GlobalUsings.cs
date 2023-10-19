@@ -1,4 +1,4 @@
-﻿global using Adnc.Infra.IRepositories;
+﻿global using Adnc.Infra.IRepository;
 global using Adnc.Infra.Redis.Caching;
 global using Adnc.Shared.Application.Caching;
 global using Adnc.Shared.Application.Contracts.Attributes;

@@ -8,21 +8,15 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(Microsoft_EntityFrameworkCore_Version)" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(Microsoft_EntityFrameworkCore_Relational_Version)" />
-	</ItemGroup>
-	
-	<ItemGroup Condition="'$(SolutionName)'=='Adnc.Shared'">
-		<PackageReference Include="Adnc.Infra.Core" Version="$(Infra_Version)" />
-		<PackageReference Include="Adnc.Infra.Repository" Version="$(Infra_Version)" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(SolutionName)'=='Adnc'">
-		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
-		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Repository\Adnc.Infra.Repository.csproj" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.6" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Adnc.Shared\Adnc.Shared.csproj" />
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.IRepository.EFCore\Adnc.Infra.IRepository.EFCore.csproj" />
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.IRepository.Mongo\Adnc.Infra.IRepository.Mongo.csproj" />
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.IRepository.SqlSugar\Adnc.Infra.IRepository.SqlSugar.csproj" />
+		<ProjectReference Include="..\Adnc.Shared\Adnc.Shared.csproj" />
 	</ItemGroup>
 </Project>

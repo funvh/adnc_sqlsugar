@@ -1,4 +1,6 @@
-﻿namespace Adnc.Infra.Repository.EfCore.Repositories
+﻿using System.Security.Principal;
+
+namespace Adnc.Infra.Repository.EfCore.Repositories
 {
     /// <summary>
     /// Ef默认的、全功能的仓储实现
@@ -92,6 +94,15 @@
             return result;
         }
 
+        public IQueryable<TEntity> WhereIF(bool confidtion, Expression<Func<TEntity, bool>> whereExpression)
+        {
+            var queryable = DbContext.Set<TEntity>().AsQueryable();
+            if (confidtion)
+                queryable = queryable.Where(whereExpression);
+
+            return queryable;
+        }
+
         public virtual async Task<int> DeleteAsync(long keyValue, CancellationToken cancellationToken = default)
         {
             int rows = 0;
@@ -147,7 +158,7 @@
         public virtual async Task<int> DeleteRangeAsync(Expression<Func<TEntity, bool>> whereExpression, CancellationToken cancellationToken = default)
         {
             var enityType = typeof(TEntity);
-            var hasSoftDeleteMember = typeof(ISoftDelete).IsAssignableFrom(enityType);
+            var hasSoftDeleteMember = typeof(ISoftDeleteFilter).IsAssignableFrom(enityType);
             if (hasSoftDeleteMember)
             {
                 var newExpression = Expression.New(enityType);

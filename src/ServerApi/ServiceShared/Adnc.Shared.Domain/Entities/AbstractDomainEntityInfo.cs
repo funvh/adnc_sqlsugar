@@ -15,6 +15,6 @@ public abstract class AbstractDomainEntityInfo : AbstracSharedEntityInfo
         if (typeList is null)
             typeList = new List<Type>();
 
-        return typeList.Append(typeof(EventTracker));
+        return typeList.Append(typeof(EFEventTracker));
     }
 }

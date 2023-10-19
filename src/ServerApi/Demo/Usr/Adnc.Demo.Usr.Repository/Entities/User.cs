@@ -3,7 +3,7 @@
 /// <summary>
 /// 管理员
 /// </summary>
-public class User : EfFullAuditEntity, ISoftDelete
+public class User : EfFullAuditEntity, ISoftDeleteFilter
 {
     //private SysDept _dept;
     //private Action<object, string> LazyLoader { get; set; }

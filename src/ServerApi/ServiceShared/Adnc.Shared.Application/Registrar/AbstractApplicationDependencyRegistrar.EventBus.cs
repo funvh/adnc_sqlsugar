@@ -20,7 +20,7 @@ public abstract partial class AbstractApplicationDependencyRegistrar
         {
             SkyApm.AddCap();
         }
-        Services.AddAdncInfraCap<TSubscriber>(option =>
+        Services.AddAdncInfraCap(option =>
         {
             if (replaceDbAction is not null)
             {
