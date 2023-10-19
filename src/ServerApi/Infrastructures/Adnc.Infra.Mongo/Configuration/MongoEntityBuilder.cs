@@ -1,4 +1,4 @@
-﻿using Adnc.Infra.Entities;
+﻿using Adnc.Infra.IRepository;
 
 namespace Adnc.Infra.Repository.Mongo.Configuration
 {

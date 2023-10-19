@@ -5,11 +5,17 @@
 	<PropertyGroup>
 		<Description>该库集成了`StackExchange.Redis`客户端，提供Redis常用类型操作、分布式锁、布隆过滤器。</Description>
 		<PackageTags>adnc,redis,stackexchange.redis</PackageTags>
+	</PropertyGroup>	
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <NoWarn>$(NoWarn);1591;0436;8604;8601</NoWarn>
+	</PropertyGroup>	
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <NoWarn>$(NoWarn);1591;0436;8604;8601</NoWarn>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="StackExchange.Redis" Version="$(StackExchange_Redis_Version)" />
 		<PackageReference Include="protobuf-net" Version="$(protobuf-net_Version)" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(Microsoft_Extensions_Options_ConfigurationExtensions_Version)"/>
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -17,7 +17,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
-	  <ProjectReference Include="..\Adnc.Infra.Repository\Adnc.Infra.Repository.csproj" />
+	  <ProjectReference Include="..\Adnc.Infra.IRepository.EFCore\Adnc.Infra.IRepository.EFCore.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Extensions\" />

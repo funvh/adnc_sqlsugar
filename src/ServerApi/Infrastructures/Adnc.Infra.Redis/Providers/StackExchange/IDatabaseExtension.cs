@@ -72,7 +72,7 @@ namespace StackExchange.Redis
                                     else
                                         return 0
                                     end";
-            var parameters = new { key = lockKey, value = lockValue };
+            var parameters = new { key = cacheKey, value = lockValue };
             var prepared = LuaScript.Prepare(script);
             var result = (int)redisDb.ScriptEvaluateAsync(prepared, parameters).GetAwaiter().GetResult();
             return result == 1;

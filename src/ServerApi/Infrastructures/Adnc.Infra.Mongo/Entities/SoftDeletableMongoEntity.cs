@@ -1,5 +1,4 @@
-﻿using Adnc.Infra.Entities;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
 namespace Adnc.Infra.Repository.Mongo.Entities
 {

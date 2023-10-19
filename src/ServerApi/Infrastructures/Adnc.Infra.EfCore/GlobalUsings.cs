@@ -1,5 +1,4 @@
-﻿global using Adnc.Infra.Entities;
-global using Adnc.Infra.IRepositories;
+﻿global using Adnc.Infra.IRepository;
 global using Adnc.Infra.Repository.EfCore.Internal;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.ChangeTracking;

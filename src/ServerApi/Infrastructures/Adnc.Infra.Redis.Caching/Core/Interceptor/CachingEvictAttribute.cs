@@ -1,9 +1,7 @@
 ﻿namespace Adnc.Infra.Redis.Caching.Core.Interceptor
 {
-    using System;
-
     /// <summary>
-    /// Adnc.Infra.Redis evict attribute.
+    /// 删除缓存特性类
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public class CachingEvictAttribute : CachingInterceptorAttribute

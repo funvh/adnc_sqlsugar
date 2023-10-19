@@ -1,5 +1,4 @@
-﻿using Adnc.Infra.Entities;
-using Adnc.Infra.Repository.Mongo.Entities;
+﻿using Adnc.Infra.Repository.Mongo.Entities;
 using MongoDB.Driver;
 
 namespace Adnc.Infra.Repository.Mongo.Extensions

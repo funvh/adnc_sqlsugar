@@ -2,7 +2,7 @@
 
 namespace Adnc.Infra.Helper.Internal.Encrypt;
 
-public partial class EncryptProivder
+public partial class EncryptProvider
 {
     /// <summary>
     /// Create des key
@@ -23,7 +23,7 @@ public partial class EncryptProivder
     }
 
     /// <summary>
-    /// DES encrypt
+    /// DES加密
     /// </summary>
     /// <param name="data">Raw data</param>
     /// <param name="key">Key, requires 24 bits</param>
@@ -32,7 +32,7 @@ public partial class EncryptProivder
     {
         Checker.Argument.IsNotEmpty(data, nameof(data));
         Checker.Argument.IsNotEmpty(key, nameof(key));
-        Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
+        //Checker.Argument.IsEqualLength(key.Length, 12, nameof(key));
 
         byte[] plainBytes = Encoding.UTF8.GetBytes(data);
         var encryptBytes = DESEncrypt(plainBytes, key, CipherMode.ECB);
@@ -54,7 +54,7 @@ public partial class EncryptProivder
     {
         Checker.Argument.IsNotEmpty(data, nameof(data));
         Checker.Argument.IsNotEmpty(key, nameof(key));
-        Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
+        ////Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
 
         return DESEncrypt(data, key, CipherMode.ECB);
     }
@@ -71,7 +71,7 @@ public partial class EncryptProivder
     {
         Checker.Argument.IsNotEmpty(data, nameof(data));
         Checker.Argument.IsNotEmpty(key, nameof(key));
-        Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
+        //Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
         Checker.Argument.IsNotEmpty(vector, nameof(vector));
         Checker.Argument.IsEqualLength(vector.Length, 8, nameof(vector));
 
@@ -91,7 +91,7 @@ public partial class EncryptProivder
     {
         Checker.Argument.IsNotEmpty(data, nameof(data));
         Checker.Argument.IsNotEmpty(key, nameof(key));
-        Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
+        //Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
 
         using (MemoryStream Memory = new MemoryStream())
         {
@@ -130,7 +130,7 @@ public partial class EncryptProivder
     }
 
     /// <summary>
-    /// DES decrypt
+    /// DES解密
     /// </summary>
     /// <param name="data">Encrypted data</param>
     /// <param name="key">Key, requires 24 bits</param>
@@ -139,7 +139,7 @@ public partial class EncryptProivder
     {
         Checker.Argument.IsNotEmpty(data, nameof(data));
         Checker.Argument.IsNotEmpty(key, nameof(key));
-        Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
+        //Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
 
         byte[] encryptedBytes = Convert.FromBase64String(data);
         byte[] bytes = DESDecrypt(encryptedBytes, key, CipherMode.ECB);
@@ -161,7 +161,7 @@ public partial class EncryptProivder
     {
         Checker.Argument.IsNotEmpty(data, nameof(data));
         Checker.Argument.IsNotEmpty(key, nameof(key));
-        Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
+        //Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
 
         return DESDecrypt(data, key, CipherMode.ECB);
     }
@@ -177,7 +177,7 @@ public partial class EncryptProivder
     {
         Checker.Argument.IsNotEmpty(data, nameof(data));
         Checker.Argument.IsNotEmpty(key, nameof(key));
-        Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
+        //Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
         Checker.Argument.IsNotEmpty(vector, nameof(vector));
         Checker.Argument.IsEqualLength(vector.Length, 8, nameof(vector));
 
@@ -196,7 +196,7 @@ public partial class EncryptProivder
     {
         Checker.Argument.IsNotEmpty(data, nameof(data));
         Checker.Argument.IsNotEmpty(key, nameof(key));
-        Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
+        //Checker.Argument.IsEqualLength(key.Length, 24, nameof(key));
 
         byte[] encryptedBytes = data;
         byte[] bKey = new byte[24];
@@ -227,7 +227,7 @@ public partial class EncryptProivder
                         Array.Copy(tmp, 0, ret, 0, len);
                         return ret;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         throw new Exception("DESDecrypt", ex);
                     }

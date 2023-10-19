@@ -14,6 +14,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
-		<ProjectReference Include="..\Adnc.Infra.Repository\Adnc.Infra.Repository.csproj" />
+		<ProjectReference Include="..\Adnc.Infra.IRepository.Mongo\Adnc.Infra.IRepository.Mongo.csproj" />
 	</ItemGroup>
 </Project>

@@ -3,7 +3,7 @@ using Adnc.Infra.Helper.Internal.Encrypt.Shared;
 
 namespace Adnc.Infra.Helper.Internal.Encrypt;
 
-public partial class EncryptProivder
+public partial class EncryptProvider
 {
     /// <summary>
     /// MD5 hash

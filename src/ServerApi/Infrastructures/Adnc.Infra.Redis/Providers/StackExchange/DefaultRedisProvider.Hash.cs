@@ -90,9 +90,12 @@ namespace Adnc.Infra.Redis.Providers.StackExchange
 
             var vals = _redisDb.HashGetAll(cacheKey);
 
-            foreach (var item in vals)
+            if (vals != null)
             {
-                if (!dict.ContainsKey(item.Name)) dict.Add(item.Name, item.Value);
+                foreach (var item in vals)
+                {
+                    if (!dict.ContainsKey(item.Name)) dict.Add(item.Name, item.Value);
+                }
             }
 
             return dict;

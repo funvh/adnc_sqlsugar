@@ -9,17 +9,17 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtension
 {
-    public static IServiceCollection AddAdncInfraCap<TSubscriber>(this IServiceCollection services, Action<CapOptions> setupAction)
-        where TSubscriber : class, ICapSubscribe
+    public static IServiceCollection AddAdncInfraCap(this IServiceCollection services, Action<CapOptions> setupAction)
     {
         if (services.HasRegistered(nameof(AddAdncInfraCap)))
             return services;
+
         services
             .AddSingleton<IEventPublisher, CapPublisher>()
-            .AddScoped<TSubscriber>()
             .AddCap(setupAction)
             .AddSubscribeFilter<DefaultCapFilter>()
             ;
+
         return services;
     }
 
