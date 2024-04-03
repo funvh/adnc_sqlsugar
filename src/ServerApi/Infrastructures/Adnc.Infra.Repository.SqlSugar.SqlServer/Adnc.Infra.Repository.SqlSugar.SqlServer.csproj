@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DotNetCore.CAP.SqlServer" Version="7.2.0" />
+		<PackageReference Include="DotNetCore.CAP.SqlServer" />
 	</ItemGroup>
 
 </Project>

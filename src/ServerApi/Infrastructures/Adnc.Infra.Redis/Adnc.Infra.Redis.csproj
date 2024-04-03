@@ -1,24 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\..\common.props" />
+
 	<Import Project="..\..\version_infra.props" />
-	<Import Project="..\..\nuget.props" />	
+	<Import Project="..\..\nuget.props" />
+
 	<PropertyGroup>
 		<Description>该库集成了`StackExchange.Redis`客户端，提供Redis常用类型操作、分布式锁、布隆过滤器。</Description>
 		<PackageTags>adnc,redis,stackexchange.redis</PackageTags>
-	</PropertyGroup>	
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <NoWarn>$(NoWarn);1591;0436;8604;8601</NoWarn>
-	</PropertyGroup>	
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <NoWarn>$(NoWarn);1591;0436;8604;8601</NoWarn>
 	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<NoWarn>$(NoWarn);1591;0436;8604;8601</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<NoWarn>$(NoWarn);1591;0436;8604;8601</NoWarn>
+	</PropertyGroup>
+
 	<ItemGroup>
-		<PackageReference Include="StackExchange.Redis" Version="$(StackExchange_Redis_Version)" />
-		<PackageReference Include="protobuf-net" Version="$(protobuf-net_Version)" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
+		<PackageReference Include="StackExchange.Redis" />
+		<PackageReference Include="protobuf-net"  />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions"  />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
+		<ProjectReference Include="..\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
 	</ItemGroup>
+
 </Project>

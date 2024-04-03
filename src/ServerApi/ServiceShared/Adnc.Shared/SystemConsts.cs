@@ -23,6 +23,7 @@
         public const string Caching = "Caching";
         public const string Consul = "Consul";
         public const string RabbitMq = "RabbitMq";
+        public const string Cap = "Cap";
         public const string MongoDb = "MongoDb";
         public const string MongoDb_ConnectionString = "MongoDb:ConnectionString";
         public const string RpcAddressInfo = "RpcAddressInfo";

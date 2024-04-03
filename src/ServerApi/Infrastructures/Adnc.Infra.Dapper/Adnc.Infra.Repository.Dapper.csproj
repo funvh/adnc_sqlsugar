@@ -8,8 +8,8 @@
 		<PackageTags>adnc,repository,dapper</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Dapper" Version="$(Dapper_Version)" />
-		<PackageReference Include="MySqlConnector" Version="$(MySqlConnector_Version)" />
+		<PackageReference Include="Dapper" />
+		<PackageReference Include="MySqlConnector" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -14,6 +14,7 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
     protected IConfiguration Configuration { get; init; }
     protected IServiceInfo ServiceInfo { get; init; }
     protected IConfigurationSection RedisSection { get; init; }
+    protected IConfigurationSection CapSection { get; init; }
     protected IConfigurationSection CachingSection { get; init; }
     protected IConfigurationSection MysqlSection { get; init; }
     protected IConfigurationSection MongoDbSection { get; init; }
@@ -32,37 +33,34 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
         MysqlSection = Configuration.GetSection(NodeConsts.Mysql);
         ConsulSection = Configuration.GetSection(NodeConsts.Consul);
         RabbitMqSection = Configuration.GetSection(NodeConsts.RabbitMq);
+        CapSection = Configuration.GetSection(NodeConsts.Cap);
         SkyApm = Services.AddSkyApmExtensions();
         RpcAddressInfo = Configuration.GetSection(NodeConsts.RpcAddressInfo).Get<List<AddressNode>>();
         PollyStrategyEnable = Configuration.GetValue("Polly:Enable", false);
     }
 
     /// <summary>
-    /// 注册所有服务
+    /// 注册基础服务
     /// </summary>
-    public abstract void AddAdnc();
-
-    /// <summary>
-    /// 注册adnc.application通用服务
-    /// </summary>
-    protected virtual void AddApplicaitonDefault()
+    public virtual void AddAdnc()
     {
-        Services
-            .AddValidatorsFromAssembly(ContractsLayerAssembly, ServiceLifetime.Scoped)
-            .AddAdncInfraAutoMapper(ApplicationLayerAssembly)   //使用AutoMapper  
-            //.AddAdncInfraMapster(ApplicationLayerAssembly)  //使用Mapster
-            .AddAdncInfraYitterIdGenerater(RedisSection)
-            .AddAdncInfraConsul(ConsulSection)
-            .AddAdncInfraDapper();
+        Services.AddAdncInfraYitterIdGenerater(RedisSection);
+        Services.AddAdncInfraConsul(ConsulSection);
+        Services.AddValidatorsFromAssembly(ContractsLayerAssembly, ServiceLifetime.Scoped);
 
         AddApplicationSharedServices();
         AddAppliactionSerivcesWithInterceptors();
         AddApplicaitonHostedServices();
-        AddEfCoreContextWithRepositories();
+        AddDbContextWithRepositories();
         AddMongoContextWithRepositries();
         AddRedisCaching();
         AddBloomFilters();
     }
+
+    /// <summary>
+    /// 添加模型映射
+    /// </summary>
+    public abstract void AddAdncInfraMapper();
 
     /// <summary>
     /// 注册application.shared层服务

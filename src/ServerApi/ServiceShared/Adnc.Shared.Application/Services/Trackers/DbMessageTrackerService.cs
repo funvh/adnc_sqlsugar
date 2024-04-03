@@ -1,4 +1,4 @@
-﻿using Adnc.Shared.Repository.EfEntities;
+﻿using Adnc.Infra.IRepository.EFCore;
 
 namespace Adnc.Shared.Application.Services.Trackers;
 

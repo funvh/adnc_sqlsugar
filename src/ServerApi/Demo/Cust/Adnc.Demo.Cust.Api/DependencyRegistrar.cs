@@ -1,5 +1,4 @@
 ﻿using Adnc.Demo.Cust.Api.Application.Subscribers;
-using Adnc.Demo.Shared.Const;
 using Adnc.Shared.Application.Registrar;
 using Adnc.Shared.WebApi.Registrar;
 
@@ -44,8 +43,8 @@ public sealed class ApplicationLayerRegistrar : AbstractApplicationDependencyReg
 
     public override void AddAdnc()
     {
-        //register base services
-        AddApplicaitonDefault();
+        base.AddAdnc();
+
         //register rpc-http services
         var restPolicies = PollyStrategyEnable ? this.GenerateDefaultRefitPolicies() : new();
         AddRestClient<IAuthRestClient>(ServiceAddressConsts.AdncDemoAuthService, restPolicies);
@@ -58,9 +57,18 @@ public sealed class ApplicationLayerRegistrar : AbstractApplicationDependencyReg
         AddGrpcClient<UsrGrpc.UsrGrpcClient>(ServiceAddressConsts.AdncDemoUsrService, gprcPolicies);
         AddGrpcClient<MaintGrpc.MaintGrpcClient>(ServiceAddressConsts.AdncDemoMaintService, gprcPolicies);
         AddGrpcClient<WhseGrpc.WhseGrpcClient>(ServiceAddressConsts.AdncDemoWhseService, gprcPolicies);
+
         //register rpc-event service
-        AddCapEventBus<CapEventSubscriber>();
+        AddCapEventBus();
+        Services.AddScoped<ICapSubscribe, CapEventSubscriber>();
+
         //register others services
         //Services.AddScoped<xxxx>
     }
+
+    public override void AddAdncInfraMapper()
+        => Services.AddAutoMapper(ApplicationLayerAssembly);
+
+    protected override void AddDbContextWithRepositories()
+       => Services.AddMySqlDbContextAndRepository(MysqlSection, RepositoryOrDomainLayerAssembly);
 }

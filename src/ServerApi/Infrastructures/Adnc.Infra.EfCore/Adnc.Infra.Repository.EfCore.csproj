@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\..\common.props" />
 	<Import Project="..\..\version_infra.props" />
 	<Import Project="..\..\nuget.props" />
 	<PropertyGroup>
@@ -8,18 +7,19 @@
 		<PackageTags>adnc,repository,efcore</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Compile Remove="Extensions\DbContextExtension.cs" />
-	  <Compile Remove="Extensions\MutableEntityTypeExtension.cs" />
-	  <Compile Remove="Internal\EFCoreUtil.cs" />
+		<Compile Remove="Extensions\DbContextExtension.cs" />
+		<Compile Remove="Extensions\MutableEntityTypeExtension.cs" />
+		<Compile Remove="Internal\EFCoreUtil.cs" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="$(Z_EntityFramework_Plus_EFCore_Version)" />
+		<PackageReference Include="Z.EntityFramework.Plus.EFCore"  />
+		<PackageReference Include="EFCore.NamingConventions" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
-	  <ProjectReference Include="..\Adnc.Infra.IRepository.EFCore\Adnc.Infra.IRepository.EFCore.csproj" />
+		<ProjectReference Include="..\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
+		<ProjectReference Include="..\Adnc.Infra.IRepository.EFCore\Adnc.Infra.IRepository.EFCore.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Extensions\" />
+		<Folder Include="Extensions\" />
 	</ItemGroup>
 </Project>

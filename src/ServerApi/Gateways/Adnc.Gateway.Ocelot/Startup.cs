@@ -1,5 +1,6 @@
 using Adnc.Gateway.Ocelot.Identity;
 using Adnc.Infra.Core.Configuration;
+using Adnc.Infra.JWT;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;

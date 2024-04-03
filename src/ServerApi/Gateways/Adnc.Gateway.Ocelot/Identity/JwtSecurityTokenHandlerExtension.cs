@@ -1,4 +1,4 @@
-﻿using Adnc.Infra.Core.Configuration;
+﻿using Adnc.Infra.JWT;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Adnc.Gateway.Ocelot.Identity;

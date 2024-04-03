@@ -1,5 +1,7 @@
 ﻿using Adnc.Demo.Maint.Repository;
+using Adnc.Infra.Repository.EfCore.MySql.Configurations;
 using Adnc.Shared.Rpc.Http.Services;
+using Microsoft.Extensions.Configuration;
 using IUsrRestClient = Adnc.Demo.Shared.Rpc.Http.Services.IUsrRestClient;
 
 namespace Adnc.Demo.Maint.Application;
@@ -18,7 +20,8 @@ public sealed class DependencyRegistrar : AbstractApplicationDependencyRegistrar
 
     public override void AddAdnc()
     {
-        AddApplicaitonDefault();
+        base.AddAdnc();
+
         //rpc-rest
         var restPolicies = PollyStrategyEnable ? this.GenerateDefaultRefitPolicies() : new();
         AddRestClient<IAuthRestClient>(ServiceAddressConsts.AdncDemoAuthService, restPolicies);
@@ -26,4 +29,10 @@ public sealed class DependencyRegistrar : AbstractApplicationDependencyRegistrar
 
         AddRabbitMqClient();
     }
+
+    public override void AddAdncInfraMapper()
+        => Services.AddAutoMapper(ApplicationLayerAssembly);
+
+    protected override void AddDbContextWithRepositories()
+       => Services.AddMySqlDbContextAndRepository(MysqlSection, RepositoryOrDomainLayerAssembly);
 }

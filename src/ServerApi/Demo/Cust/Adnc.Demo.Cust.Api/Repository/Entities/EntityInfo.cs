@@ -1,4 +1,7 @@
-﻿namespace Adnc.Demo.Cust.Api.Repository.Entities;
+﻿using Adnc.Infra.IRepository.EFCore;
+using Adnc.Shared.Repository.EFCore;
+
+namespace Adnc.Demo.Cust.Api.Repository.Entities;
 
 public class EntityInfo : AbstracSharedEntityInfo
 {

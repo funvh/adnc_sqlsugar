@@ -1,4 +1,7 @@
-﻿namespace Adnc.Shared.Domain.Entities;
+﻿using Adnc.Infra.IRepository.EFCore;
+using Adnc.Shared.Repository.EFCore;
+
+namespace Adnc.Shared.Domain.Entities;
 
 public abstract class AbstractDomainEntityInfo : AbstracSharedEntityInfo
 {
@@ -6,12 +9,13 @@ public abstract class AbstractDomainEntityInfo : AbstracSharedEntityInfo
     {
     }
 
-    protected  override IEnumerable<Type> GetEntityTypes(Assembly assembly)
+    protected override IEnumerable<Type> GetEntityTypes(Assembly assembly)
     {
-        var typeList = assembly.GetTypes().Where(m =>
-                                                   m.FullName != null
-                                                   && (typeof(AggregateRoot).IsAssignableFrom(m) || typeof(DomainEntity).IsAssignableFrom(m))
-                                                   && !m.IsAbstract);
+        var typeList = assembly.GetTypes().Where(
+            m => m.FullName != null &&
+                (typeof(AggregateRoot).IsAssignableFrom(m) || typeof(DomainEntity).IsAssignableFrom(m)) &&
+                !m.IsAbstract);
+
         if (typeList is null)
             typeList = new List<Type>();
 

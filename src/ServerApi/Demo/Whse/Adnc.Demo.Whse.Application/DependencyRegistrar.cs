@@ -22,7 +22,8 @@ public sealed class WhseApplicationDependencyRegistrar : AbstractApplicationDepe
 
     public override void AddAdnc()
     {
-        AddApplicaitonDefault();
+        base.AddAdnc();
+
         AddDomainSerivces<IDomainService>();
 
         //rpc-rest
@@ -30,8 +31,9 @@ public sealed class WhseApplicationDependencyRegistrar : AbstractApplicationDepe
         AddRestClient<IAuthRestClient>(ServiceAddressConsts.AdncDemoAuthService, restPolicies);
         AddRestClient<IUsrRestClient>(ServiceAddressConsts.AdncDemoUsrService, restPolicies);
         AddRestClient<IMaintRestClient>(ServiceAddressConsts.AdncDemoMaintService, restPolicies);
+
         //rpc-event
-        AddCapEventBus<CapEventSubscriber>(replaceDbAction: capOption =>
+        AddCapEventBus(replaceDbAction: capOption =>
         {
             var connectionString = _sqlSection.GetValue<string>("ConnectionString");
             capOption.UseSqlServer(config =>
@@ -40,7 +42,12 @@ public sealed class WhseApplicationDependencyRegistrar : AbstractApplicationDepe
                 config.Schema = "cap";
             });
         });
+        Services.AddScoped<ICapSubscribe, CapEventSubscriber>();
     }
 
-    protected override void AddEfCoreContext() => Services.AddAdncInfraEfCoreSQLServer(_sqlSection);
+    public override void AddAdncInfraMapper()
+        => Services.AddAutoMapper(ApplicationLayerAssembly);
+
+    protected override void AddDbContextWithRepositories()
+       => Services.AddMySqlDbContextAndRepository(MysqlSection, RepositoryOrDomainLayerAssembly);
 }

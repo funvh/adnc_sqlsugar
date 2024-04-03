@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-	<Import Project="..\..\..\common.props" />
+
 	<Import Project="..\..\..\version_service.props" />
+
 	<PropertyGroup>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Description>用户中心服务</Description>
@@ -9,46 +10,38 @@
 		<ServerGarbageCollection>false</ServerGarbageCollection>
 		<ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
 	</PropertyGroup>
+
 	<ItemGroup>
 		<None Include="..\..\Shared\resources\**\*">
 			<Link>%(RecursiveDir)/%(FileName)%(Extension)</Link>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>	
+		</None>
 	</ItemGroup>
+
 	<ItemGroup>
-		<PackageReference Include="Grpc.AspNetCore" Version="$(Grpc_AspNetCore_Version)" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="$(Microsoft_EntityFrameworkCore_Design_Version)">
+		<PackageReference Include="Grpc.AspNetCore" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="$(Microsoft_EntityFrameworkCore_Tools_Version)">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<ProjectReference Include="..\Adnc.Demo.Usr.Application.Contracts\Adnc.Demo.Usr.Application.Contracts.csproj" />
 		<ProjectReference Include="..\Adnc.Demo.Usr.Application\Adnc.Demo.Usr.Application.csproj" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(SolutionName)'=='Adnc'">
 		<ProjectReference Include="..\..\..\ServiceShared\Adnc.Shared.WebApi\Adnc.Shared.WebApi.csproj" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(SolutionName)'=='Adnc.Demo' ">
-		<PackageReference Include="Adnc.Shared.WebApi" Version="$(Shared_Version)" />
-	</ItemGroup>
-	
-	<ItemGroup>
 		<!--<Protobuf Include="..\..\..\ServiceShared\Adnc.Shared\Protos\Rtos\*.proto" GrpcServices="Server" Link="Grpc\Protos\Rtos\%(RecursiveDir)%(Filename)%(Extension)" ProtoRoot="..\..\..\ServiceShared\Adnc.Shared\" />-->
 		<Protobuf Include="..\..\Shared\protos\services\authgrpc.proto" GrpcServices="Server" Link="Grpc\protos\authgrpc.proto" ProtoRoot="..\..\Shared\protos\" />
 		<Protobuf Include="..\..\Shared\protos\services\usrgrpc.proto" GrpcServices="Server" Link="Grpc\protos\usrgrpc.proto" ProtoRoot="..\..\Shared\protos\" />
 	</ItemGroup>
-	
-<!--<Target Name="BuildTheApplicationProject" BeforeTargets="BeforeBuild">
+
+	<!--<Target Name="BuildTheApplicationProject" BeforeTargets="BeforeBuild">
 			<MSBuild Projects="..\Adnc.Demo.Usr.Application\Adnc.Demo.Usr.Application.csproj" Targets="Build" Properties="Configuration=$(Configuration);Platform=$(Platform)" />
 	</Target>
 	<Target Name="CopyTheApplicationFilesAfterBuild" AfterTargets="AfterBuild">
@@ -65,6 +58,9 @@
 		<Copy SkipUnchangedFiles="true" SourceFiles="@(OutputFileToCopy)" DestinationFolder="$(PublishUrl)" Condition="'$(Configuration)'=='Release'" />
 	</Target>-->
 	<ProjectExtensions>
-		<VisualStudio><UserProperties /></VisualStudio>
+		<VisualStudio>
+			<UserProperties />
+		</VisualStudio>
 	</ProjectExtensions>
+
 </Project>

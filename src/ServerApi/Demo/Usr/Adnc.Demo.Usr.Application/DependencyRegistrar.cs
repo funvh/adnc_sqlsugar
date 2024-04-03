@@ -12,5 +12,20 @@ public sealed class DependencyRegistrar : AbstractApplicationDependencyRegistrar
     {
     }
 
-    public override void AddAdnc() => AddApplicaitonDefault();
+    public override void AddAdnc()
+    {
+        base.AddAdnc();
+
+        AddApplicaitonHostedServices();
+        AddDbContextWithRepositories();
+        AddMongoContextWithRepositries();
+        AddRedisCaching();
+        AddBloomFilters();
+    }
+
+    protected override void AddDbContextWithRepositories()
+        => Services.AddMySqlDbContextAndRepository(MysqlSection, RepositoryOrDomainLayerAssembly);
+
+    public override void AddAdncInfraMapper()
+        => Services.AddAdncInfraAutoMapper(ApplicationLayerAssembly);  //使用AutoMapper 
 }

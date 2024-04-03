@@ -1,5 +1,7 @@
-﻿using Adnc.Shared.Application.Registrar;
+﻿using Adnc.Infra.Repository.EfCore.MySql.Configurations;
+using Adnc.Shared.Application.Registrar;
 using Adnc.Shared.Rpc.Http.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace Adnc.Demo.Ord.Application;
 
@@ -17,7 +19,8 @@ public sealed class OrdApplicationDependencyRegistrar : AbstractApplicationDepen
 
     public override void AddAdnc()
     {
-        AddApplicaitonDefault();
+        base.AddAdnc();
+
         AddDomainSerivces<IDomainService>();
 
         //rpc-rest
@@ -26,7 +29,15 @@ public sealed class OrdApplicationDependencyRegistrar : AbstractApplicationDepen
         AddRestClient<IUsrRestClient>(ServiceAddressConsts.AdncDemoUsrService, restPolicies);
         AddRestClient<IMaintRestClient>(ServiceAddressConsts.AdncDemoMaintService, restPolicies);
         AddRestClient<IWhseRestClient>(ServiceAddressConsts.AdncDemoWhseService, restPolicies);
+
         //rpc-event
-        AddCapEventBus<CapEventSubscriber>();
+        AddCapEventBus();
+        Services.AddScoped<ICapSubscribe, CapEventSubscriber>();
     }
+
+    public override void AddAdncInfraMapper()
+        => Services.AddAutoMapper(ApplicationLayerAssembly);
+
+    protected override void AddDbContextWithRepositories()
+       => Services.AddMySqlDbContextAndRepository(MysqlSection, RepositoryOrDomainLayerAssembly);
 }

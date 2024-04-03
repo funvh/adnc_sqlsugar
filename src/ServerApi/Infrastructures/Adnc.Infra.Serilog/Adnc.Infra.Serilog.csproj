@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\..\common.props" />
+	
 	<Import Project="..\..\version_infra.props" />
 	<Import Project="..\..\nuget.props" />
 
 	<ItemGroup>
-		<PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
-		<PackageReference Include="Serilog.Sinks.MongoDB" Version="5.3.1" />
-		<PackageReference Include="Serilog.Sinks.Seq" Version="5.2.2" />
+		<PackageReference Include="Serilog.AspNetCore" />
+		<PackageReference Include="Serilog.Sinks.MongoDB" />
+		<PackageReference Include="Serilog.Sinks.Seq"  />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
+		<ProjectReference Include="..\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
 	</ItemGroup>
 
 </Project>

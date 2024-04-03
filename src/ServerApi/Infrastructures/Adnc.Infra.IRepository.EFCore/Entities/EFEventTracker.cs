@@ -1,4 +1,4 @@
-﻿namespace Adnc.Shared.Repository.EfEntities;
+﻿namespace Adnc.Infra.IRepository.EFCore;
 
 /// <summary>
 /// 事件跟踪/处理信息

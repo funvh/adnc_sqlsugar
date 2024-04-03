@@ -1,17 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+	<ItemGroup>
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+	</ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+	</ItemGroup>
 
 </Project>
