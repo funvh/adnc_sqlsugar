@@ -1,7 +1,6 @@
 ﻿using Adnc.Demo.Shared.Const;
 using Adnc.Demo.Shared.Rpc.Http.Services;
 using Adnc.Demo.Whse.Application.Subscribers;
-using Adnc.Demo.Whse.Domain.EntityConfig;
 using Adnc.Shared.Domain;
 using Adnc.Shared.Rpc.Http.Services;
 using Adnc.Shared.WebApi.Registrar;
@@ -22,11 +21,11 @@ public sealed class WhseWebApiDependencyRegistrar : AbstractDependencyRegistrar
     {
     }
 
-    protected override Assembly ApplicationContractAssembly => Assembly.Load(ServiceInfo.ApplicationContractAssemblyName);
+    protected override Assembly AppServiceInterfaceLayerAssembly => Assembly.Load(ServiceInfo.ApplicationAssemblyName);
 
     protected override Assembly ApplicationAssembly => Assembly.Load(ServiceInfo.ApplicationAssemblyName);
 
-    protected override Assembly RepositoryOrDomainAssembly => typeof(EntityInfo).Assembly;
+    protected override Assembly RepositoryOrDomainAssembly => Assembly.Load(ServiceInfo.DomainAssemblyName);
 
     public override void AddAdnc()
     {

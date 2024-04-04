@@ -2,6 +2,7 @@
 using Adnc.Demo.Shared.Rpc.Http.Services;
 using Adnc.Shared.Rpc.Http.Services;
 using Adnc.Shared.WebApi.Registrar;
+using FluentValidation;
 using System.Reflection;
 
 namespace Adnc.Demo.Maint.Api;
@@ -18,11 +19,11 @@ public sealed class MaintWebApiDependencyRegistrar : AbstractDependencyRegistrar
     {
     }
 
-    protected override Assembly ApplicationContractAssembly => Assembly.Load(ServiceInfo.ApplicationContractAssemblyName);
+    protected override Assembly AppServiceInterfaceLayerAssembly => Assembly.Load(ServiceInfo.ApplicationAssemblyName);
 
     protected override Assembly ApplicationAssembly => Assembly.Load(ServiceInfo.ApplicationAssemblyName);
 
-    protected override Assembly RepositoryOrDomainAssembly => typeof(EntityInfo).Assembly;
+    protected override Assembly RepositoryOrDomainAssembly => Assembly.Load(ServiceInfo.RepositoryAssemblyName);
 
     public override void AddAdnc()
     {
@@ -36,6 +37,9 @@ public sealed class MaintWebApiDependencyRegistrar : AbstractDependencyRegistrar
         AddRestClient<IUsrRestClient>(ServiceAddressConsts.AdncDemoUsrService, restPolicies);
 
         AddRabbitMqClient();
+
+        // 添加模型验证扫描服务
+        Services.AddValidatorsFromAssembly(ApplicationAssembly, ServiceLifetime.Scoped);
     }
 
     public override void UseAdnc()

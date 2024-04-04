@@ -6,7 +6,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" />
 	</ItemGroup>
 
 </Project>

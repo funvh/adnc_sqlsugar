@@ -46,6 +46,11 @@ public interface IServiceInfo
     public Assembly StartAssembly { get; }
 
     /// <summary>
+    /// The assembly's prefix
+    /// </summary>
+    public string AssemblyPrefix { get;  }
+
+    /// <summary>
     /// Migrations Assembly Name
     /// </summary>
     public string MigrationsAssemblyName { get; }
@@ -53,4 +58,8 @@ public interface IServiceInfo
     public string ApplicationAssemblyName { get; }
 
     public string ApplicationContractAssemblyName { get; }
+
+    public string RepositoryAssemblyName { get; }
+
+    public string DomainAssemblyName { get; }
 }

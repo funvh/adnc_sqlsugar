@@ -1,5 +1,6 @@
 ﻿using Adnc.Demo.Cust.Api.Application.Subscribers;
 using Adnc.Shared.WebApi.Registrar;
+using System.Reflection;
 
 namespace Adnc.Demo.Cust.Api;
 
@@ -7,17 +8,21 @@ public sealed class ApiLayerRegistrar : AbstractDependencyRegistrar
 {
     public ApiLayerRegistrar(IServiceCollection services) : base(services)
     {
+        _assembly = Assembly.GetExecutingAssembly();
     }
 
     public ApiLayerRegistrar(IApplicationBuilder appBuilder) : base(appBuilder)
     {
+        _assembly = Assembly.GetExecutingAssembly();
     }
 
-    protected override Assembly ApplicationContractAssembly => Assembly.GetExecutingAssembly();
+    private readonly Assembly _assembly;
 
-    protected override Assembly ApplicationAssembly => Assembly.GetExecutingAssembly();
+    protected override Assembly AppServiceInterfaceLayerAssembly => _assembly;
 
-    protected override Assembly RepositoryOrDomainAssembly => Assembly.GetExecutingAssembly();
+    protected override Assembly ApplicationAssembly => _assembly;
+
+    protected override Assembly RepositoryOrDomainAssembly => _assembly;
 
     public override void AddAdnc()
     {
@@ -45,6 +50,8 @@ public sealed class ApiLayerRegistrar : AbstractDependencyRegistrar
         Services.AddScoped<ICapSubscribe, CapEventSubscriber>();
 
         //register others services
+        // 添加模型验证扫描服务
+        Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), ServiceLifetime.Scoped);
     }
 
     public override void UseAdnc()

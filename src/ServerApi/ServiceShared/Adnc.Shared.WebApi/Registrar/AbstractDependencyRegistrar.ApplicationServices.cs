@@ -20,7 +20,7 @@ public abstract partial class AbstractDependencyRegistrar
         action?.Invoke(Services);
 
         var appServiceType = typeof(IAppService);
-        var serviceTypes = ApplicationContractAssembly.GetExportedTypes().Where(type => type.IsInterface && type.IsAssignableTo(appServiceType)).ToList();
+        var serviceTypes = AppServiceInterfaceLayerAssembly.GetExportedTypes().Where(type => type.IsInterface && type.IsAssignableTo(appServiceType)).ToList();
         serviceTypes.ForEach(serviceType =>
         {
             var implType = ApplicationAssembly.ExportedTypes.FirstOrDefault(type => type.IsAssignableTo(serviceType) && type.IsNotAbstractClass(true));

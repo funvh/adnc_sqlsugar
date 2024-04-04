@@ -6,17 +6,18 @@ using Adnc.Shared.Domain;
 using Adnc.Shared.Rpc.Http.Services;
 using Adnc.Shared.WebApi.Registrar;
 using DotNetCore.CAP;
+using FluentValidation;
 using System.Reflection;
 
 namespace Adnc.Demo.Ord.Api;
 
 public sealed class OrdWebApiDependencyRegistrar : AbstractDependencyRegistrar
 {
-    protected override Assembly ApplicationContractAssembly => Assembly.Load(ServiceInfo.ApplicationContractAssemblyName);
+    protected override Assembly AppServiceInterfaceLayerAssembly => Assembly.Load(ServiceInfo.ApplicationAssemblyName);
 
     protected override Assembly ApplicationAssembly => Assembly.Load(ServiceInfo.ApplicationAssemblyName);
 
-    protected override Assembly RepositoryOrDomainAssembly => typeof(EntityInfo).Assembly;
+    protected override Assembly RepositoryOrDomainAssembly => Assembly.Load(ServiceInfo.DomainAssemblyName);
 
     public OrdWebApiDependencyRegistrar(IServiceCollection services)
         : base(services)
@@ -46,6 +47,9 @@ public sealed class OrdWebApiDependencyRegistrar : AbstractDependencyRegistrar
         //rpc-event
         AddCapEventBus();
         Services.AddScoped<ICapSubscribe, CapEventSubscriber>();
+
+        // 添加模型验证扫描服务
+        Services.AddValidatorsFromAssembly(ApplicationAssembly, ServiceLifetime.Scoped);
     }
 
     public override void UseAdnc()

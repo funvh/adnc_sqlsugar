@@ -6,7 +6,6 @@ using Adnc.Shared.Application.Interceptors;
 using Adnc.Shared.Application.Services.Trackers;
 using Adnc.Shared.WebApi.Authentication;
 using Adnc.Shared.WebApi.Authorization;
-using FluentValidation;
 using SkyApm.Utilities.DependencyInjection;
 
 namespace Adnc.Shared.WebApi.Registrar;
@@ -18,8 +17,19 @@ public abstract partial class AbstractDependencyRegistrar : IDependencyRegistrar
     protected IServiceCollection Services { get; init; } = default!;
     protected IServiceInfo ServiceInfo { get; init; } = default!;
 
-    protected abstract Assembly ApplicationContractAssembly { get; }
+    /// <summary>
+    /// 应用服务接口所在层
+    /// </summary>
+    protected abstract Assembly AppServiceInterfaceLayerAssembly { get; }
+
+    /// <summary>
+    /// 应用服务所在层
+    /// </summary>
     protected abstract Assembly ApplicationAssembly { get; }
+
+    /// <summary>
+    /// 仓储或领域所在层
+    /// </summary>
     protected abstract Assembly RepositoryOrDomainAssembly { get; }
 
     /// <summary>
@@ -108,8 +118,8 @@ public abstract partial class AbstractDependencyRegistrar : IDependencyRegistrar
         }
 
         Services.AddAdncInfraYitterIdGenerater(RedisSection);
+
         Services.AddAdncInfraConsul(ConsulSection);
-        Services.AddValidatorsFromAssembly(ApplicationContractAssembly, ServiceLifetime.Scoped);
 
         AddApplicationSharedServices();
 
@@ -146,7 +156,7 @@ public abstract partial class AbstractDependencyRegistrar : IDependencyRegistrar
         Services.AddHostedService<CachingHostedService>();
         Services.AddHostedService<BloomFilterHostedService>();
         Services.AddHostedService<ChannelConsumersHostedService>();
-        
+
         Services.AddScoped<IMessageTracker, RedisMessageTrackerService>();
         Services.AddScoped<MessageTrackerFactory>();
     }

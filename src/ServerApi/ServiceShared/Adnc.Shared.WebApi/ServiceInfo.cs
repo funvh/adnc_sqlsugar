@@ -19,6 +19,12 @@ public class ServiceInfo : IServiceInfo
 
     public string ApplicationContractAssemblyName { get; private set; } = string.Empty;
 
+    public string AssemblyPrefix { get; private set; } = string.Empty;
+
+    public string RepositoryAssemblyName { get; private set; }
+
+    public string DomainAssemblyName { get; private set; }
+
     private ServiceInfo()
     {
     }
@@ -55,6 +61,7 @@ public class ServiceInfo : IServiceInfo
 
             var names = startAssemblyName.Split(".");
             migrationsAssemblyName ??= startAssemblyName.Replace($".{names.Last()}", ".Migrations");
+            var assemblyPrefix = startAssemblyName.Replace($".{names.Last()}", "");
             _instance = new ServiceInfo
             {
                 Id = serviceId,
@@ -63,11 +70,14 @@ public class ServiceInfo : IServiceInfo
                 RelativeRootPath = $"{names[^2]}/{names[^1]}".ToLower(),
                 CorsPolicy = "default",
                 StartAssembly = startAssembly,
+                AssemblyPrefix = startAssemblyName.Replace($".{names.Last()}", ""),
                 Description = description,
                 Version = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}",
                 MigrationsAssemblyName = migrationsAssemblyName,
                 ApplicationAssemblyName = startAssemblyName.Replace($".{names.Last()}", ".Application"),
                 ApplicationContractAssemblyName = startAssemblyName.Replace($".{names.Last()}", ".Application.Contracts"),
+                DomainAssemblyName = assemblyPrefix + ".Domain",
+                RepositoryAssemblyName = assemblyPrefix + ".Repository"
             };
         }
         return _instance;
