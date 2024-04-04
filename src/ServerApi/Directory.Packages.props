@@ -11,7 +11,7 @@
     <PackageVersion Include="EFCore.NamingConventions" Version="6.0.0" />
     <PackageVersion Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
     <PackageVersion Include="MongoDB.Driver" Version="2.19.1" />
-    <PackageVersion Include="SqlSugarCore" Version="5.1.4.104" />
+    <PackageVersion Include="SqlSugarCore" Version="5.1.4.151" />
     <PackageVersion Include="Dapper" Version="2.0.123" />
     <PackageVersion Include="MySqlConnector" Version="2.1.2" />
     <PackageVersion Include="DotNetCore.CAP" Version="6.2.1" />

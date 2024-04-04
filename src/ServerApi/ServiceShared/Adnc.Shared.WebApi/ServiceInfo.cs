@@ -15,6 +15,10 @@ public class ServiceInfo : IServiceInfo
     public Assembly StartAssembly { get; private set; } = default!;
     public string MigrationsAssemblyName { get; private set; } = string.Empty;
 
+    public string ApplicationAssemblyName { get; private set; } = string.Empty;
+
+    public string ApplicationContractAssemblyName { get; private set; } = string.Empty;
+
     private ServiceInfo()
     {
     }
@@ -61,7 +65,9 @@ public class ServiceInfo : IServiceInfo
                 StartAssembly = startAssembly,
                 Description = description,
                 Version = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}",
-                MigrationsAssemblyName = migrationsAssemblyName
+                MigrationsAssemblyName = migrationsAssemblyName,
+                ApplicationAssemblyName = startAssemblyName.Replace($".{names.Last()}", ".Application"),
+                ApplicationContractAssemblyName = startAssemblyName.Replace($".{names.Last()}", ".Application.Contracts"),
             };
         }
         return _instance;

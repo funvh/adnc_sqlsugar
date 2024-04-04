@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\version_shared.props" />
+	<Import Project="..\..\nuget.props" />
+
+	<PropertyGroup>
+		<Description>该库是提供所有Apllication层的公共实现。</Description>
+		<PackageTags>Adnc.Shared.Application</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Repository.SqlSugar.SqlServer\Adnc.Infra.Repository.SqlSugar.SqlServer.csproj" />
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Core\Adnc.Infra.Core.csproj" />
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Helper\Adnc.Infra.Helper.csproj" />
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.IdGenerater\Adnc.Infra.IdGenerater.csproj" />
+		<ProjectReference Include="..\Adnc.Shared\Adnc.Shared.csproj" />
+	</ItemGroup>
+</Project>

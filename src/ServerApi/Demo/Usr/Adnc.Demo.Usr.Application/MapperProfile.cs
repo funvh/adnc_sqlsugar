@@ -1,4 +1,4 @@
-﻿using Adnc.Demo.Shared.Rpc.Grpc.Messages;
+﻿using AutoMapper;
 
 namespace Adnc.Demo.Usr.Application;
 

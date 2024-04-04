@@ -10,6 +10,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Adnc.Infra.Helper\Adnc.Infra.Helper.csproj" />
 		<ProjectReference Include="..\Adnc.Infra.SqlSugar\Adnc.Infra.Repository.SqlSugar.csproj" />
 	</ItemGroup>
 

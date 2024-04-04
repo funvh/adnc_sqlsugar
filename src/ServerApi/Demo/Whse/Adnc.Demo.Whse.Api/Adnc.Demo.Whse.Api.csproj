@@ -19,7 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AspNetCore.HealthChecks.SqlServer"  />
+		<PackageReference Include="AspNetCore.HealthChecks.SqlServer" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -31,6 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\ServiceShared\Adnc.Shared.Registrar.EFCore\Adnc.Shared.Registrar.EFCore.csproj" />
 		<ProjectReference Include="..\Adnc.Demo.Whse.Application\Adnc.Demo.Whse.Application.csproj" />
 		<ProjectReference Include="..\..\..\ServiceShared\Adnc.Shared.WebApi\Adnc.Shared.WebApi.csproj" />
 	</ItemGroup>

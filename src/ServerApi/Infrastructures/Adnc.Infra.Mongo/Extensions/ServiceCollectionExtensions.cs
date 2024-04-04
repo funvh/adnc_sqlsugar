@@ -1,14 +1,13 @@
-﻿using Adnc.Infra.IRepositories;
+﻿using Adnc.Infra.Repository.Mongo;
 using Adnc.Infra.Repository.Mongo.Configuration;
 using Adnc.Infra.Repository.Mongo.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Adnc.Infra.Repository.Mongo.Extensions
-{
-    /// <summary>
-    /// Extensions for <see cref="IServiceCollection"/> to add easy MongoDB wiring.
-    /// </summary>
-    public static class ServiceCollectionExtensions
+namespace Microsoft.Extensions.DependencyInjection;
+
+/// <summary>
+/// Extensions for <see cref="IServiceCollection"/> to add easy MongoDB wiring.
+/// </summary>
+public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Registers the MongoDB context with the specified service collection.
@@ -47,4 +46,3 @@ namespace Adnc.Infra.Repository.Mongo.Extensions
             return services.AddAdncInfraMongo<TContext>(c => c.ConnectionString = connectionString);
         }
     }
-}

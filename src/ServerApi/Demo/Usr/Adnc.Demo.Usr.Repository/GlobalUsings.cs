@@ -2,9 +2,11 @@
 global using Adnc.Demo.Usr.Repository.Entities;
 global using Adnc.Infra.IRepository;
 global using Adnc.Infra.IRepository.EFCore;
+global using Adnc.Infra.IRepository.SqlSugar.Entities;
 global using Adnc.Shared;
 global using Adnc.Shared.Repository.EFCore;
 global using Adnc.Shared.Repository.EfEntities.Config;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using SqlSugar;
 global using System.Reflection;

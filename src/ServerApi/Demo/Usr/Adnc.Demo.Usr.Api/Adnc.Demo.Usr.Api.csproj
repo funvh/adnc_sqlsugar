@@ -33,6 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\ServiceShared\Adnc.Shared.Application.SqlSugar\Adnc.Shared.Registrar.SqlSugar.csproj" />
 		<ProjectReference Include="..\Adnc.Demo.Usr.Application.Contracts\Adnc.Demo.Usr.Application.Contracts.csproj" />
 		<ProjectReference Include="..\Adnc.Demo.Usr.Application\Adnc.Demo.Usr.Application.csproj" />
 		<ProjectReference Include="..\..\..\ServiceShared\Adnc.Shared.WebApi\Adnc.Shared.WebApi.csproj" />

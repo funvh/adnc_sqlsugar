@@ -2,10 +2,10 @@
 
 public class OrganizationAppService : AbstractAppService, IOrganizationAppService
 {
-    private readonly IEfRepository<Organization> _organizationRepository;
+    private readonly ISqlSugarRepository<Organization> _organizationRepository;
     private readonly CacheService _cacheService;
 
-    public OrganizationAppService(IEfRepository<Organization> organizationRepository
+    public OrganizationAppService(ISqlSugarRepository<Organization> organizationRepository
         , CacheService cacheService)
     {
         _organizationRepository = organizationRepository;

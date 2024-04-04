@@ -3,7 +3,8 @@
 /// <summary>
 /// 菜单
 /// </summary>
-public class Menu : EfFullAuditEntity
+[SugarTable("sys_menu")]
+public class Menu : SqlSugarEntity
 {
     /// <summary>
     /// 编号

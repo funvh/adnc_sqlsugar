@@ -16,7 +16,7 @@ public static class ServiceCollectionExtension
     {
         if (serviceInfo?.StartAssembly is null)
             throw new ArgumentNullException(nameof(serviceInfo));
-        var webApiRegistarType = serviceInfo.StartAssembly.ExportedTypes.FirstOrDefault(m => m.IsAssignableTo(typeof(IDependencyRegistrar)) && m.IsAssignableTo(typeof(AbstractWebApiDependencyRegistrar)) && m.IsNotAbstractClass(true));
+        var webApiRegistarType = serviceInfo.StartAssembly.ExportedTypes.FirstOrDefault(m => m.IsAssignableTo(typeof(IDependencyRegistrar)) && m.IsAssignableTo(typeof(AbstractDependencyRegistrar)) && m.IsNotAbstractClass(true));
         if (webApiRegistarType is null)
             throw new NullReferenceException(nameof(IDependencyRegistrar));
 

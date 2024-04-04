@@ -40,9 +40,9 @@ public class CacheKeyBloomFilter : AbstractBloomFilter
             };
 
             using var scope = _serviceProvider.Value.CreateScope();
-            var repository = scope.ServiceProvider.GetRequiredService<IEfRepository<User>>();
+            var repository = scope.ServiceProvider.GetRequiredService<ISqlSugarRepository<User>>();
             var ids = await repository
-                                                    .GetAll()
+                                                    .AsQueryable()
                                                     .Select(x => x.Id)
                                                     .ToListAsync();
             if (ids.IsNotNullOrEmpty())

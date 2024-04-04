@@ -22,8 +22,8 @@ public class AccountBloomFilter : AbstractBloomFilter
         if (!exists)
         {
             using var scope = _services.Value.CreateScope();
-            var repository = scope.ServiceProvider.GetRequiredService<IEfRepository<User>>();
-            var values = await repository.GetAll()
+            var repository = scope.ServiceProvider.GetRequiredService<ISqlSugarRepository<User>>();
+            var values = await repository.AsQueryable()
                                          .Select(x => x.Account)
                                          .ToListAsync();
             await InitAsync(values);

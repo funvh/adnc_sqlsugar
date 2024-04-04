@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<PackageReference Include="Mapster" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Adnc.Infra.Mapper\Adnc.Infra.Mapper.csproj" />
+	</ItemGroup>
+</Project>

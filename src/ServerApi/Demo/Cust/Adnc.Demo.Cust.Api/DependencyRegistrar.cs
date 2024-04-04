@@ -1,10 +1,9 @@
 ﻿using Adnc.Demo.Cust.Api.Application.Subscribers;
-using Adnc.Shared.Application.Registrar;
 using Adnc.Shared.WebApi.Registrar;
 
 namespace Adnc.Demo.Cust.Api;
 
-public sealed class ApiLayerRegistrar : AbstractWebApiDependencyRegistrar
+public sealed class ApiLayerRegistrar : AbstractDependencyRegistrar
 {
     public ApiLayerRegistrar(IServiceCollection services) : base(services)
     {
@@ -14,39 +13,22 @@ public sealed class ApiLayerRegistrar : AbstractWebApiDependencyRegistrar
     {
     }
 
+    protected override Assembly ApplicationContractAssembly => Assembly.GetExecutingAssembly();
+
+    protected override Assembly ApplicationAssembly => Assembly.GetExecutingAssembly();
+
+    protected override Assembly RepositoryOrDomainAssembly => Assembly.GetExecutingAssembly();
+
     public override void AddAdnc()
     {
         AddWebApiDefault();
         AddHealthChecks(true, true, true, false);
         //register others services
         //Services.AddScoped<xxxx>
-    }
 
-    public override void UseAdnc()
-    {
-        UseWebApiDefault();
-    }
-}
-
-public sealed class ApplicationLayerRegistrar : AbstractApplicationDependencyRegistrar
-{
-    private readonly Assembly _assembly;
-
-    public ApplicationLayerRegistrar(IServiceCollection services) : base(services)
-    {
-        _assembly = Assembly.GetExecutingAssembly();
-    }
-
-    public override Assembly ApplicationLayerAssembly => _assembly;
-    public override Assembly ContractsLayerAssembly => _assembly;
-    public override Assembly RepositoryOrDomainLayerAssembly => _assembly;
-
-    public override void AddAdnc()
-    {
-        base.AddAdnc();
 
         //register rpc-http services
-        var restPolicies = PollyStrategyEnable ? this.GenerateDefaultRefitPolicies() : new();
+        var restPolicies = this.GenerateDefaultRefitPolicies();
         AddRestClient<IAuthRestClient>(ServiceAddressConsts.AdncDemoAuthService, restPolicies);
         AddRestClient<IUsrRestClient>(ServiceAddressConsts.AdncDemoUsrService, restPolicies);
         AddRestClient<IMaintRestClient>(ServiceAddressConsts.AdncDemoMaintService, restPolicies);
@@ -63,12 +45,13 @@ public sealed class ApplicationLayerRegistrar : AbstractApplicationDependencyReg
         Services.AddScoped<ICapSubscribe, CapEventSubscriber>();
 
         //register others services
-        //Services.AddScoped<xxxx>
     }
 
-    public override void AddAdncInfraMapper()
-        => Services.AddAutoMapper(ApplicationLayerAssembly);
+    public override void UseAdnc()
+    {
+        UseWebApiDefault();
+    }
 
     protected override void AddDbContextWithRepositories()
-       => Services.AddMySqlDbContextAndRepository(MysqlSection, RepositoryOrDomainLayerAssembly);
+        => Services.AddEfCoreContextWithRepositories(RepositoryOrDomainAssembly, Configuration);
 }

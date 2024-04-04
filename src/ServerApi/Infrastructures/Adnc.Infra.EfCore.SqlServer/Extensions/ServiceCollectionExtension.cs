@@ -5,7 +5,8 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtension
 {
-    public static IServiceCollection AddAdncInfraEfCoreSQLServer(this IServiceCollection services, Action<DbContextOptionsBuilder> optionsBuilder)
+    public static IServiceCollection AddAdncInfraEfCoreSQLServer(this IServiceCollection services,
+        Action<DbContextOptionsBuilder> optionsBuilder)
     {
         if (services.HasRegistered(nameof(AddAdncInfraEfCoreSQLServer)))
             return services;
@@ -18,9 +19,17 @@ public static class ServiceCollectionExtension
         return services;
     }
 
-    public static IServiceCollection AddAdncInfraEfCoreSQLServer(this IServiceCollection services, IConfigurationSection sqlServerSection)
+    public static IServiceCollection AddAdncInfraEfCoreSQLServer(this IServiceCollection services,
+        IConfiguration config)
     {
-        var connectionString = sqlServerSection.GetValue<string>("ConnectionString");
+        var connectionString = config.GetConnectionString("Default");
+
+        return services.AddAdncInfraEfCoreSQLServer(connectionString);
+    }
+
+    public static IServiceCollection AddAdncInfraEfCoreSQLServer(this IServiceCollection services,
+        string connectionString)
+    {
         var serviceInfo = services.GetServiceInfo();
 
         return AddAdncInfraEfCoreSQLServer(services, options =>

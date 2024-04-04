@@ -1,23 +1,25 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Adnc.Infra.IRepository.SqlSugar;
+using Microsoft.AspNetCore.Http;
+using SqlSugar;
 
 namespace Adnc.Demo.Usr.Application.Services;
 
 public class UserAppService : AbstractAppService, IUserAppService
 {
-    private readonly IEfRepository<User> _userRepository;
-    private readonly IEfRepository<Role> _roleRepository;
-    private readonly IEfRepository<Menu> _menuRepository;
+    private readonly ISqlSugarRepository<User> _userRepository;
+    private readonly ISqlSugarRepository<Role> _roleRepository;
+    private readonly ISqlSugarRepository<Menu> _menuRepository;
     private readonly CacheService _cacheService;
     private readonly BloomFilterFactory _bloomFilterFactory;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
     public UserAppService(
-        IEfRepository<User> userRepository
-        , IEfRepository<Role> roleRepository
-        , IEfRepository<Menu> menuRepository
-        , CacheService cacheService
-        , BloomFilterFactory bloomFilterFactory
-        , IHttpContextAccessor httpContextAccessor)
+        ISqlSugarRepository<User> userRepository,
+        ISqlSugarRepository<Role> roleRepository,
+        ISqlSugarRepository<Menu> menuRepository,
+        CacheService cacheService,
+        BloomFilterFactory bloomFilterFactory,
+        IHttpContextAccessor httpContextAccessor)
     {
         _userRepository = userRepository;
         _roleRepository = roleRepository;
@@ -85,7 +87,7 @@ public class UserAppService : AbstractAppService, IUserAppService
 
     public async Task<AppSrvResult> ChangeStatusAsync(IEnumerable<long> ids, int status)
     {
-        await _userRepository.UpdateRangeAsync(u => ids.Contains(u.Id), u => new User { Status = status });
+        await _userRepository.UpdateAsync(u => ids.Contains(u.Id), u => new User { Status = status });
         return AppSrvResult();
     }
 
@@ -185,7 +187,13 @@ public class UserAppService : AbstractAppService, IUserAppService
                 userInfoDto.Profile.Roles.Add(role.Name);
             }
 
-            var roleMenus = await _menuRepository.GetMenusByRoleIdsAsync(roleIds.ToArray(), true);
+            var roleMenus = await _menuRepository.DbContext.Queryable<RoleRelation>()
+                .AsNavQueryable()
+                .Where(r => roleIds.Contains(r.RoleId) && r.Menu.Status == true)
+                .Includes(r => r.Menu)
+                .Distinct()
+                .ToListAsync(t => t.Menu);
+
             if (roleMenus.IsNotNullOrEmpty())
                 userInfoDto.Permissions.AddRange(roleMenus.Select(x => x.Url).Distinct());
         }

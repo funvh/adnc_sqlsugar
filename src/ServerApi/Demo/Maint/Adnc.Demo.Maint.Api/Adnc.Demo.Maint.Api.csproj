@@ -35,6 +35,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\ServiceShared\Adnc.Shared.Registrar.EFCore\Adnc.Shared.Registrar.EFCore.csproj" />
 		<ProjectReference Include="..\Adnc.Demo.Maint.Application\Adnc.Demo.Maint.Application.csproj" />
 		<ProjectReference Include="..\..\..\ServiceShared\Adnc.Shared.WebApi\Adnc.Shared.WebApi.csproj" />
 	</ItemGroup>

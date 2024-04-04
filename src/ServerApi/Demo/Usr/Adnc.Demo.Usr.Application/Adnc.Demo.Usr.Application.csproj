@@ -4,6 +4,7 @@
 	
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Infrastructures\Adnc.Infra.JWT\Adnc.Infra.JWT.csproj" />
+		<ProjectReference Include="..\..\..\Infrastructures\Adnc.Infra.Mapper.AutoMapper\Adnc.Infra.Mapper.AutoMapper.csproj" />
 		<ProjectReference Include="..\..\Shared\Adnc.Demo.Shared.Rpc.Grpc\Adnc.Demo.Shared.Rpc.Grpc.csproj" />
 		<ProjectReference Include="..\..\Shared\Adnc.Demo.Shared.Rpc.Http\Adnc.Demo.Shared.Rpc.Http.csproj" />
 		<ProjectReference Include="..\Adnc.Demo.Usr.Application.Contracts\Adnc.Demo.Usr.Application.Contracts.csproj" />

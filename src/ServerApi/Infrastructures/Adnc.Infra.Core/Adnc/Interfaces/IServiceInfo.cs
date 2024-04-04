@@ -49,4 +49,8 @@ public interface IServiceInfo
     /// Migrations Assembly Name
     /// </summary>
     public string MigrationsAssemblyName { get; }
+
+    public string ApplicationAssemblyName { get; }
+
+    public string ApplicationContractAssemblyName { get; }
 }

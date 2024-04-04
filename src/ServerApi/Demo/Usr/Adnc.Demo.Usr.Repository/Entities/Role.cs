@@ -3,7 +3,8 @@
 /// <summary>
 /// 角色
 /// </summary>
-public class Role : EfFullAuditEntity
+[SugarTable("sys_role")]
+public class Role : SqlSugarEntity
 {
     public long? DeptId { get; set; }
 

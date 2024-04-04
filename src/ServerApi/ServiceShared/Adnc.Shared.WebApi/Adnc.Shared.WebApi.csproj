@@ -28,35 +28,38 @@
 		<PackageReference Include="MiniProfiler.AspNetCore.Mvc" />
 		<PackageReference Include="MiniProfiler.EntityFrameworkCore" />
 		<!--<PackageReference Include="SkyApm.Diagnostics.MongoDB" Version="1.0.0" />-->
-		<PackageReference Include="AspNetCore.HealthChecks.Rabbitmq"   />
-		<PackageReference Include="AspNetCore.HealthChecks.UI.Client"  />
-		<PackageReference Include="AspNetCore.HealthChecks.MySql"   />
-		<PackageReference Include="AspNetCore.HealthChecks.MongoDb"   />
+		<PackageReference Include="AspNetCore.HealthChecks.Rabbitmq" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" />
+		<PackageReference Include="AspNetCore.HealthChecks.MySql" />
+		<PackageReference Include="AspNetCore.HealthChecks.MongoDb" />
 		<!--<PackageReference Include="AspNetCore.HealthChecks.Redis" Version="5.0.2" />-->
-		<PackageReference Include="LiteX.HealthChecks.Redis"   />
-		<PackageReference Include="prometheus-net.AspNetCore"  />
-		<PackageReference Include="prometheus-net.DotNetRuntime"   />
-		<PackageReference Include="NLog.Targets.Loki"   />
-		<PackageReference Include="NLog.Mongo"  >
+		<PackageReference Include="LiteX.HealthChecks.Redis" />
+		<PackageReference Include="prometheus-net.AspNetCore" />
+		<PackageReference Include="prometheus-net.DotNetRuntime" />
+		<PackageReference Include="NLog.Targets.Loki" />
+		<PackageReference Include="NLog.Mongo">
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
-		<PackageReference Include="NLog.Web.AspNetCore"  >
+		<PackageReference Include="NLog.Web.AspNetCore">
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
-		<PackageReference Include="SkyAPM.Agent.AspNetCore" >
+		<PackageReference Include="SkyAPM.Agent.AspNetCore">
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.JWT\Adnc.Infra.JWT.csproj" />
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Mapper.AutoMapper\Adnc.Infra.Mapper.AutoMapper.csproj" />
 		<ProjectReference Include="..\Adnc.Shared.Application.Contracts\Adnc.Shared.Application.Contracts.csproj" />
+		<ProjectReference Include="..\Adnc.Shared.Application\Adnc.Shared.Application.csproj" />
 		<ProjectReference Include="..\Adnc.Shared.Rpc\Adnc.Shared.Rpc.csproj" />
 		<ProjectReference Include="..\Adnc.Shared\Adnc.Shared.csproj" />
 		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Consul\Adnc.Infra.Consul.csproj" />
 		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.EventBus\Adnc.Infra.EventBus.csproj" />
 		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Helper\Adnc.Infra.Helper.csproj" />
 		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Redis.Caching\Adnc.Infra.Redis.Caching.csproj" />
+		<ProjectReference Include="..\..\Infrastructures\Adnc.Infra.Mongo\Adnc.Infra.Repository.Mongo.csproj" />
 	</ItemGroup>
 
 </Project>

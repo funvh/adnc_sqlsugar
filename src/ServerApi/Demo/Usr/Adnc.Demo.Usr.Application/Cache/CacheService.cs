@@ -46,7 +46,7 @@ public sealed class CacheService : AbstractCacheService, ICachePreheatable
         //var cacheValue = await CacheProvider.Value.GetAsync(cacheKey, async () =>
         //{
         //    using var scope = ServiceProvider.Value.CreateScope();
-        //    var userRepository = scope.ServiceProvider.GetRequiredService<IEfRepository<SysUser>>();
+        //    var userRepository = scope.ServiceProvider.GetRequiredService<ISqlSugarRepository<SysUser>>();
         //    return await userRepository.FetchAsync(x => new UserValidatedInfoDto(x.Id, x.Account, x.Name, x.RoleIds, x.Status, x.Password), x => x.Id == Id && x.Status == 1);
         //}, GetRefreshTokenExpires());
         var cacheValue = await CacheProvider.Value.GetAsync<UserValidatedInfoDto>(cacheKey);
@@ -64,8 +64,8 @@ public sealed class CacheService : AbstractCacheService, ICachePreheatable
         var cahceValue = await CacheProvider.Value.GetAsync(CachingConsts.DetpListCacheKey, async () =>
         {
             using var scope = ServiceProvider.Value.CreateScope();
-            var orgRepository = scope.ServiceProvider.GetRequiredService<IEfRepository<Organization>>();
-            var allOrganizations = await orgRepository.GetAll(writeDb: true).OrderBy(x => x.Ordinal).ToListAsync();
+            var orgRepository = scope.ServiceProvider.GetRequiredService<ISqlSugarRepository<Organization>>();
+            var allOrganizations = await orgRepository.AsQueryable().OrderBy(x => x.Ordinal).ToListAsync();
             return Mapper.Value.Map<List<OrganizationDto>>(allOrganizations);
         }, TimeSpan.FromSeconds(GeneralConsts.OneYear));
 
@@ -77,8 +77,8 @@ public sealed class CacheService : AbstractCacheService, ICachePreheatable
         var cahceValue = await CacheProvider.Value.GetAsync(CachingConsts.MenuRelationCacheKey, async () =>
         {
             using var scope = ServiceProvider.Value.CreateScope();
-            var relationRepository = scope.ServiceProvider.GetRequiredService<IEfRepository<RoleRelation>>();
-            var allRelations = await relationRepository.GetAll(writeDb: true).ToListAsync();
+            var relationRepository = scope.ServiceProvider.GetRequiredService<ISqlSugarRepository<RoleRelation>>();
+            var allRelations = await relationRepository.AsQueryable().ToListAsync();
             return Mapper.Value.Map<List<RelationDto>>(allRelations);
         }, TimeSpan.FromSeconds(GeneralConsts.OneYear));
 
@@ -90,8 +90,8 @@ public sealed class CacheService : AbstractCacheService, ICachePreheatable
         var cahceValue = await CacheProvider.Value.GetAsync(CachingConsts.MenuListCacheKey, async () =>
         {
             using var scope = ServiceProvider.Value.CreateScope();
-            var menuRepository = scope.ServiceProvider.GetRequiredService<IEfRepository<Menu>>();
-            var allMenus = await menuRepository.GetAll(writeDb: true).OrderBy(x => x.Ordinal).ToListAsync();
+            var menuRepository = scope.ServiceProvider.GetRequiredService<ISqlSugarRepository<Menu>>();
+            var allMenus = await menuRepository.AsQueryable().OrderBy(x => x.Ordinal).ToListAsync();
             return Mapper.Value.Map<List<MenuDto>>(allMenus);
         }, TimeSpan.FromSeconds(GeneralConsts.OneYear));
 
@@ -103,8 +103,8 @@ public sealed class CacheService : AbstractCacheService, ICachePreheatable
         var cahceValue = await CacheProvider.Value.GetAsync(CachingConsts.RoleListCacheKey, async () =>
         {
             using var scope = ServiceProvider.Value.CreateScope();
-            var roleRepository = scope.ServiceProvider.GetRequiredService<IEfRepository<Role>>();
-            var allRoles = await roleRepository.GetAll(writeDb: true).OrderBy(x => x.Ordinal).ToListAsync();
+            var roleRepository = scope.ServiceProvider.GetRequiredService<ISqlSugarRepository<Role>>();
+            var allRoles = await roleRepository.AsQueryable().OrderBy(x => x.Ordinal).ToListAsync();
             return Mapper.Value.Map<List<RoleDto>>(allRoles);
         }, TimeSpan.FromSeconds(GeneralConsts.OneYear));
 
@@ -116,11 +116,12 @@ public sealed class CacheService : AbstractCacheService, ICachePreheatable
         var cahceValue = await CacheProvider.Value.GetAsync(CachingConsts.MenuCodesCacheKey, async () =>
         {
             using var scope = ServiceProvider.Value.CreateScope();
-            var relationRepository = scope.ServiceProvider.GetRequiredService<IEfRepository<RoleRelation>>();
-            var allMenus = await relationRepository.GetAll(writeDb: true)
-                                                                            .Where(x => x.Menu.Status)
-                                                                            .Select(x => new RoleMenuCodesDto { RoleId = x.RoleId, Code = x.Menu.Code })
-                                                                            .ToListAsync();
+            var relationRepository = scope.ServiceProvider.GetRequiredService<ISqlSugarRepository<RoleRelation>>();
+            var allMenus = await relationRepository
+                .AsNavQueryable()
+                .Where(x => x.Menu.Status == true)
+                .Select(x => new RoleMenuCodesDto { RoleId = x.RoleId, Code = x.Menu.Code })
+                .ToListAsync();
             return allMenus.Distinct().ToList();
         }, TimeSpan.FromSeconds(GeneralConsts.OneYear));
 

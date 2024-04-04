@@ -2,10 +2,10 @@
 
 public class MenuAppService : AbstractAppService, IMenuAppService
 {
-    private readonly IEfRepository<Menu> _menuRepository;
+    private readonly ISqlSugarRepository<Menu> _menuRepository;
     private readonly CacheService _cacheService;
 
-    public MenuAppService(IEfRepository<Menu> menuRepository, CacheService cacheService)
+    public MenuAppService(ISqlSugarRepository<Menu> menuRepository, CacheService cacheService)
     {
         _menuRepository = menuRepository;
         _cacheService = cacheService;

@@ -3,7 +3,8 @@
 /// <summary>
 /// 部门
 /// </summary>
-public class Organization : EfFullAuditEntity
+[SugarTable("sys_organization")]
+public class Organization : SqlSugarEntity
 {
     public string FullName { get; set; } = string.Empty;
 

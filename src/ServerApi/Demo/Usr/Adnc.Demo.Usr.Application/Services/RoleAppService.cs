@@ -1,15 +1,17 @@
-﻿namespace Adnc.Demo.Usr.Application.Services;
+﻿using SqlSugar;
+
+namespace Adnc.Demo.Usr.Application.Services;
 
 public class RoleAppService : AbstractAppService, IRoleAppService
 {
-    private readonly IEfRepository<Role> _roleRepository;
-    private readonly IEfRepository<User> _userRepository;
-    private readonly IEfRepository<RoleRelation> _relationRepository;
+    private readonly ISqlSugarRepository<Role> _roleRepository;
+    private readonly ISqlSugarRepository<User> _userRepository;
+    private readonly ISqlSugarRepository<RoleRelation> _relationRepository;
     private readonly CacheService _cacheService;
 
-    public RoleAppService(IEfRepository<Role> roleRepository,
-        IEfRepository<User> userRepository,
-        IEfRepository<RoleRelation> relationRepository,
+    public RoleAppService(ISqlSugarRepository<Role> roleRepository,
+        ISqlSugarRepository<User> userRepository,
+        ISqlSugarRepository<RoleRelation> relationRepository,
         CacheService cacheService)
     {
         _roleRepository = roleRepository;
@@ -78,7 +80,7 @@ public class RoleAppService : AbstractAppService, IRoleAppService
                 }
             );
         }
-        await _relationRepository.InsertRangeAsync(relations);
+        await _relationRepository.InsertAsync(relations);
 
         return AppSrvResult();
     }

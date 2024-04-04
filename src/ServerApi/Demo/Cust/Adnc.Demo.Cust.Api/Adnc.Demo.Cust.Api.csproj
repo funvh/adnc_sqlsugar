@@ -31,6 +31,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Infrastructures\Adnc.Infra.EfCore.MySql\Adnc.Infra.Repository.EfCore.MySql.csproj" />
+		<ProjectReference Include="..\..\..\Infrastructures\Adnc.Infra.Mapper.AutoMapper\Adnc.Infra.Mapper.AutoMapper.csproj" />
+		<ProjectReference Include="..\..\..\ServiceShared\Adnc.Shared.Registrar.EFCore\Adnc.Shared.Registrar.EFCore.csproj" />
 		<ProjectReference Include="..\..\Shared\Adnc.Demo.Shared.Const\Adnc.Demo.Shared.Const.csproj" />
 		<ProjectReference Include="..\..\Shared\Adnc.Demo.Shared.Rpc.Event\Adnc.Demo.Shared.Rpc.Event.csproj" />
 		<ProjectReference Include="..\..\Shared\Adnc.Demo.Shared.Rpc.Http\Adnc.Demo.Shared.Rpc.Http.csproj" />

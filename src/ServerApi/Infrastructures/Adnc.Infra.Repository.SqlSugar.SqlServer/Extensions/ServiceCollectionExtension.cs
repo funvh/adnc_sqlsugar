@@ -13,7 +13,8 @@ public static class ServiceCollectionExtension
     /// <param name="services"></param>
     /// <param name="clients"></param>
     /// <returns></returns>
-    public static IServiceCollection AddAdncInfraSqlSugarSqlServer(this IServiceCollection services, List<SqlSugarClient> clients)
+    public static IServiceCollection AddAdncInfraSqlSugarSqlServer(this IServiceCollection services,
+        List<SqlSugarClient> clients)
     {
         if (services.HasRegistered(nameof(AddAdncInfraSqlSugarSqlServer)))
             return services;
@@ -39,7 +40,8 @@ public static class ServiceCollectionExtension
     /// <param name="services"></param>
     /// <param name="clients"></param>
     /// <returns></returns>
-    public static IServiceCollection AddAdncInfraSqlSugarSqlServer(this IServiceCollection services, List<SqlSugarScope> clients)
+    public static IServiceCollection AddAdncInfraSqlSugarSqlServer(this IServiceCollection services,
+        List<SqlSugarScope> clients)
     {
         if (services.HasRegistered(nameof(AddAdncInfraSqlSugarSqlServer)))
             return services;
